@@ -1,14 +1,6 @@
 package com.hugoamac.ms_spring_postgres.domain.dto;
+/**
+ * This record provide the input dto to CreateTask Use Case.
+ */
+public record CreateTaskInputDTO(String name, String description) { }
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class CreateTaskInputDTO {
-
-    private String name;
-    private String description;
-}

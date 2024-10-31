@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.hugoamac.ms_spring_postgres.application.service.TaskService;
 import com.hugoamac.ms_spring_postgres.domain.dto.CreateTaskInputDTO;
 import com.hugoamac.ms_spring_postgres.domain.dto.CreateTaskOutputDTO;
+import com.hugoamac.ms_spring_postgres.domain.dto.FindTaskOutputDTO;
 import com.hugoamac.ms_spring_postgres.domain.dto.ListTaskOutputDTO;
 
 /**
@@ -36,6 +37,10 @@ public class TaskResource {
 
     public CompletableFuture<ResponseEntity<ListTaskOutputDTO>> list() {
         return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(taskService.list()));
+    }
+
+    public CompletableFuture<ResponseEntity<FindTaskOutputDTO>> find(String code) {
+        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(taskService.find(code)));
     }
 
 }

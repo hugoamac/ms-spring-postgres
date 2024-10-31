@@ -10,11 +10,11 @@ import com.hugoamac.ms_spring_postgres.domain.repository.TaskRepository;
 /**
  * @author hugo
  * @since 2022-11-16
- * This class provides the use case for creating a task 
+ *        This class provides the use case for creating a task
  */
 public class CreateTaskUseCase {
 
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
     public CreateTaskUseCase(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
@@ -22,6 +22,7 @@ public class CreateTaskUseCase {
 
     /**
      * Execute the use case to created a task
+     * 
      * @param createTaskInputDTO
      * @return The dto with the id of the created task
      */
@@ -34,15 +35,13 @@ public class CreateTaskUseCase {
 
             Task task = new Task();
             task.setId(idString);
-            task.setName(createTaskInputDTO.getName());
-            task.setDescription(createTaskInputDTO.getDescription());
+            task.setName(createTaskInputDTO.name());
+            task.setDescription(createTaskInputDTO.description());
             task.setDone(false);
 
             String id = taskRepository.create(task);
-            CreateTaskOutputDTO createTaskOutputDTO = new CreateTaskOutputDTO();
-            createTaskOutputDTO.setId(id);
-
-            return createTaskOutputDTO;
+            
+            return new CreateTaskOutputDTO(id);
         } catch (Exception e) {
             throw e;
         }

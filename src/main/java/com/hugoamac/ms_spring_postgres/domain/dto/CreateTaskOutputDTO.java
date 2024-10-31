@@ -1,13 +1,6 @@
 package com.hugoamac.ms_spring_postgres.domain.dto;
+/**
+ * This record provide the output dto to CreateTask Use Case.
+ */
+public record CreateTaskOutputDTO(String id) { }
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class CreateTaskOutputDTO {
-
-    private String id;
-}

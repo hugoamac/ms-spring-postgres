@@ -2,6 +2,7 @@ package com.hugoamac.ms_spring_postgres.application.service;
 
 import com.hugoamac.ms_spring_postgres.domain.dto.CreateTaskInputDTO;
 import com.hugoamac.ms_spring_postgres.domain.dto.CreateTaskOutputDTO;
+import com.hugoamac.ms_spring_postgres.domain.dto.FindTaskOutputDTO;
 import com.hugoamac.ms_spring_postgres.domain.dto.ListTaskOutputDTO;
 
 /**
@@ -25,4 +26,12 @@ public interface TaskService {
      * @return
      */
     public ListTaskOutputDTO list();
+
+    /**
+     * Find a task
+     * 
+     * @param code
+     * @return
+     */
+    public FindTaskOutputDTO find(String code);
 }

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.hugoamac.ms_spring_postgres.domain.repository.TaskRepository;
 import com.hugoamac.ms_spring_postgres.domain.usecase.CreateTaskUseCase;
+import com.hugoamac.ms_spring_postgres.domain.usecase.FindTaskUseCase;
 import com.hugoamac.ms_spring_postgres.domain.usecase.ListTaskUseCase;
 
 /**
@@ -23,5 +24,10 @@ public class RegistryUseCaseConfig {
     @Bean
     public ListTaskUseCase listTaskUseCase(TaskRepository taskRepository) {
         return new ListTaskUseCase(taskRepository);
+    }
+
+    @Bean
+    public FindTaskUseCase findTaskUseCase(TaskRepository taskRepository) {
+        return new FindTaskUseCase(taskRepository);
     }
 }
