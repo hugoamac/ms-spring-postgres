@@ -2,8 +2,10 @@ package com.hugoamac.ms_spring_postgres.application.resource;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.hugoamac.ms_spring_postgres.application.service.TaskService;
 import com.hugoamac.ms_spring_postgres.domain.dto.CreateTaskInputDTO;
@@ -52,7 +54,7 @@ public class TaskResource {
                 FindTaskOutputDTO output = taskService.find(code);
                 return ResponseEntity.ok(output);
             } catch (Exception e) {
-                return ResponseEntity.notFound().build();
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
             }
         });
     }
