@@ -32,7 +32,14 @@ public class TaskResource {
      * @return
      */
     public CompletableFuture<ResponseEntity<CreateTaskOutputDTO>> create(CreateTaskInputDTO createTaskInputDTO) {
-        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(taskService.create(createTaskInputDTO)));
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                CreateTaskOutputDTO output = taskService.create(createTaskInputDTO);
+                return ResponseEntity.ok(output);
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
+        });
     }
 
     public CompletableFuture<ResponseEntity<ListTaskOutputDTO>> list() {
@@ -40,7 +47,14 @@ public class TaskResource {
     }
 
     public CompletableFuture<ResponseEntity<FindTaskOutputDTO>> find(String code) {
-        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(taskService.find(code)));
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                FindTaskOutputDTO output = taskService.find(code);
+                return ResponseEntity.ok(output);
+            } catch (Exception e) {
+                return ResponseEntity.notFound().build();
+            }
+        });
     }
 
 }

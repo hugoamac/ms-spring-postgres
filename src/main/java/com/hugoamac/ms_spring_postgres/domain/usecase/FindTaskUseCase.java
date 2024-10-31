@@ -17,9 +17,19 @@ public class FindTaskUseCase {
         this.taskRepository = taskRepository;
     }
 
-    public FindTaskOutputDTO execute(String code){
-        Task task = taskRepository.find(code);
-        return new FindTaskOutputDTO(task);
+    public FindTaskOutputDTO execute(String code) {
+        if (code == null || code.isEmpty()) {
+            throw new IllegalArgumentException("Code cannot be null or empty");
+        }
+        try {
+            Task task = taskRepository.find(code);
+            if (task == null) {
+                throw new RuntimeException("Task not found");
+            }
+            return new FindTaskOutputDTO(task);
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while finding the task", e);
+        }
     }
 
 }

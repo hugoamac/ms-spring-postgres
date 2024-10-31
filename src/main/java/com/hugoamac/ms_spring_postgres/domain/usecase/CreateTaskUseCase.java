@@ -28,6 +28,10 @@ public class CreateTaskUseCase {
      */
     public CreateTaskOutputDTO execute(CreateTaskInputDTO createTaskInputDTO) {
 
+        if (createTaskInputDTO == null) {
+            throw new IllegalArgumentException("CreateTaskInputDTO cannot be null");
+        }
+
         try {
 
             UUID uuid = UUID.randomUUID();
@@ -40,10 +44,14 @@ public class CreateTaskUseCase {
             task.setDone(false);
 
             String id = taskRepository.create(task);
-            
+
+            if (id == null) {
+                throw new RuntimeException("An error occurred while creating the task");
+            }
+
             return new CreateTaskOutputDTO(id);
         } catch (Exception e) {
-            throw e;
+            throw new RuntimeException("An error occurred while creating the task", e);
         }
     }
 }
